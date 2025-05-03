@@ -9,6 +9,11 @@ const gridTemplateLarge = `
   "a a a"
   "a a a"
   "a a a"
+  "a a a"
+  "a a a"
+  "a a a"
+  "a a a"
+  "a a a"
   "b b b"
   "b b b"
   "b b b"
@@ -16,6 +21,8 @@ const gridTemplateLarge = `
 `;
 
 const gridTemplateSmall = `
+  "a"
+  "a"
   "a"
   "a"
   "a"
