@@ -20,6 +20,9 @@ interface TimerSettingsContextType {
   setSessions: (sessions: Session[]) => void;
   endTime: number | null;
   setEndTime: (time: number | null) => void;
+  isAuthenticated: boolean;
+  login: () => void;
+  logout: () => void;
 }
 
 const TimerSettingsContext = createContext<TimerSettingsContextType | undefined>(undefined);
@@ -31,6 +34,7 @@ export const TimerSettingsProvider = ({ children }: { children: ReactNode }) => 
   const [durations, setDurations] = useState<{ work: number; break: number }>({ work: 25, break: 5 });
   const [sessions, setSessions] = useState<Session[]>([]);
   const [endTime, setEndTime] = useState<number | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -51,6 +55,9 @@ export const TimerSettingsProvider = ({ children }: { children: ReactNode }) => 
 
     const savedIsBreak = localStorage.getItem('pomodoroIsBreak');
     if (savedIsBreak) setIsBreak(savedIsBreak === 'true');
+
+    const savedAuth = localStorage.getItem('isAuthenticated');
+    if (savedAuth) setIsAuthenticated(savedAuth === 'true');
   }, []);
 
   // Persist to localStorage on changes
@@ -82,6 +89,18 @@ export const TimerSettingsProvider = ({ children }: { children: ReactNode }) => 
     localStorage.setItem('pomodoroIsBreak', isBreak.toString());
   }, [isBreak]);
 
+  useEffect(() => {
+    localStorage.setItem('isAuthenticated', isAuthenticated.toString());
+  }, [isAuthenticated]);
+
+  const login = () => {
+    setIsAuthenticated(true);
+  };
+
+  const logout = () => {
+    setIsAuthenticated(false);
+  };
+
   return (
     <TimerSettingsContext.Provider
       value={{
@@ -97,6 +116,9 @@ export const TimerSettingsProvider = ({ children }: { children: ReactNode }) => 
         setSessions,
         endTime,
         setEndTime,
+        isAuthenticated,
+        login,
+        logout,
       }}
     >
       {children}

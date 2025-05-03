@@ -1,14 +1,23 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import { Box, Typography, useTheme } from "@mui/material";
-import FlexBetween from "@/components/FlexBetween";
+import FlexBetween from "../../components/FlexBetween";
+import { useTimerSettings } from "../../context/TimerSettingsContext";
 
 type Props = {};
 
 const Navbar = (props: Props) => {
   const { palette } = useTheme();
   const [selected, setSelected] = useState("dashboard");
+  const navigate = useNavigate();
+  const { logout } = useTimerSettings();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
+
   return (
     <FlexBetween mb="0.25rem" p="0.5rem 0rem" color={palette.grey[300]}>
       {/* LEFT SIDE */}
@@ -56,6 +65,12 @@ const Navbar = (props: Props) => {
           >
             Task List
           </Link>
+        </Box>
+        <Box
+          sx={{ cursor: "pointer", "&:hover": { color: palette.primary[100] } }}
+          onClick={handleLogout}
+        >
+          Logout
         </Box>
       </FlexBetween>
     </FlexBetween>
