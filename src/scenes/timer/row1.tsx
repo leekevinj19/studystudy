@@ -92,7 +92,7 @@ const Row1 = () => {
 
   useEffect(() => {
     sessionStorage.setItem('pomodoroIsRunning', isRunning.toString());
-  }, [isRunning]);
+  }, [isRunning, timeLeft]);
 
   useEffect(() => {
     sessionStorage.setItem('pomodoroIsBreak', isBreak.toString());
@@ -155,7 +155,7 @@ const Row1 = () => {
       setEndTime(Date.now() + timeLeft * 1000);
     }
     // Do not clear endTime on pause to preserve remaining time
-  }, [isRunning]);
+  }, [isRunning, timeLeft]);
 
 
   const formatTime = (seconds: number): string => {

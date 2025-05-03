@@ -2,6 +2,7 @@ import BoxHeader from "@/components/BoxHeader";
 import DashboardBox from "@/components/DashboardBox";
 import { useTheme } from "@mui/material";
 import Timer from "@/scenes/timer/TimerContent";
+import Row2 from "@/scenes/timer/row2";
 import TaskList from "@/scenes/tasklist/TasklistContent";
 
 const Row1 = () => {
@@ -11,11 +12,7 @@ const Row1 = () => {
   return (
     <>
       <DashboardBox gridArea="a">
-        <BoxHeader
-          title="History (LOG)"
-          subtitle="Previous Session Data"
-          sideText="reee"
-        />
+        <Row2 />
       </DashboardBox>
 
       <DashboardBox gridArea="b">

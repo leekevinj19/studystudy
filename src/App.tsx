@@ -8,6 +8,7 @@ import Navbar from "@/scenes/navbar";
 import Dashboard from "@/scenes/dashboard";
 import Tasklist from "@/scenes/tasklist";
 import Timer from "@/scenes/timer";
+import { TimerSettingsProvider } from "./context/TimerSettingsContext";
 
 function App() {
   const theme = useMemo(() => createTheme(themeSettings), []);
@@ -16,14 +17,16 @@ function App() {
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Box width="100%" height="100%" padding="1rem 2rem 4rem 2rem">
-            <Navbar />
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/timer" element={<Timer />} />
-              <Route path="/tasklist" element={<Tasklist />} />
-            </Routes>
-          </Box>
+          <TimerSettingsProvider>
+            <Box width="100%" height="100%" padding="1rem 2rem 4rem 2rem">
+              <Navbar />
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/timer" element={<Timer />} />
+                <Route path="/tasklist" element={<Tasklist />} />
+              </Routes>
+            </Box>
+          </TimerSettingsProvider>
         </ThemeProvider>
       </BrowserRouter>
     </div>
